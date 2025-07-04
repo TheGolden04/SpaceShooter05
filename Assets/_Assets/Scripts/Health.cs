@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
-{
-    // Các biến từ cả 2 slide
+public class Health : MonoBehaviour 
+{ 
     public GameObject explosionPrefab;
     public int defaultHealthPoint;
     private int healthPoint;
+    public System.Action onDead;
 
     private void Start()
     {
@@ -34,5 +34,6 @@ public class Health : MonoBehaviour
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation); // Tạo ra một bản sao của prefab hiệu ứng nổ.
         Destroy(explosion, 1); // Hủy đối tượng hiệu ứng nổ sau 1 giây, để nó có thời gian hiển thị.
         Destroy(gameObject); // Hủy chính đối tượng game object đang gắn script này
+        onDead?.Invoke(); // Thông báo cho các đối tượng khác rằng đối tượng này đã chết.
     }
 }
