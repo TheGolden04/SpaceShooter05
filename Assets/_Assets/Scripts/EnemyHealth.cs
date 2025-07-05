@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnemyHealth : Health
 {
-    public static int LivingEnemyCount; // Biến 'static' để đếm chung số lượng kẻ địch đang sống cho toàn bộ màn chơi.
+    public static int LivingEnemyCount;
     private void Awake()
     {
-        LivingEnemyCount++; // Khi kẻ địch được tạo, tăng tổng số kẻ địch lên 1 (hàm Awake() tự động chạy).
+        LivingEnemyCount++; // Mỗi enemy mới tạo sẽ tăng
     }
+
     protected override void Die()
     {
-        LivingEnemyCount--;
-        base.Die(); // Luôn gọi hàm của lớp cha để chạy các chức năng chung.
         Debug.Log("Enemy died");
+        LivingEnemyCount--;  // Khi enemy chết thì giảm
+        base.Die();          // Gọi Die() của lớp cha (Health)
     }
 }
+

@@ -9,11 +9,6 @@ public class BattleFlow : MonoBehaviour
     public GameObject gameWinUI;
     public PlayerHealth playerHealth;
     public GameObject bgMusic;
-    private void Awake()
-    {
-    // Reset giá trị ở biến static
-        EnemyHealth.LivingEnemyCount = 0;
-    }
 
     private void Start()
     {
@@ -23,10 +18,11 @@ public class BattleFlow : MonoBehaviour
     }
     private void Update()
     {
-        if (EnemyHealth.LivingEnemyCount <= 0) // Biến static EnemyHealth.LivingEnemyCount luôn tăng thêm 5 mỗi khi ta ấn play
+        if (EnemyHealth.LivingEnemyCount <= 0)
         {
             OnGameWin();
         }
+        Debug.Log("LivingEnemyCount = " + EnemyHealth.LivingEnemyCount);
     }
     private void OnGameOver()
     {
@@ -35,6 +31,7 @@ public class BattleFlow : MonoBehaviour
     }
     private void OnGameWin()
     {
+        Debug.Log("YOU WIN!");
         gameWinUI.SetActive(true);
         bgMusic.SetActive(false);
         playerHealth.gameObject.SetActive(false);
