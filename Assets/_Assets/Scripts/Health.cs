@@ -7,7 +7,9 @@ public class Health : MonoBehaviour
     public GameObject explosionPrefab;
     public int defaultHealthPoint;
     private int healthPoint;
-    public System.Action onDead;
+    public System.Action onDead; // Khai báo biến delegate onDead công khai (delegate tương tự như con trỏ trong C/C++)
+                                 // onDead là 1 kiểu action, được định nghĩa là delegate: khai báo định dạng hàm sẵn.
+                                 // Như 1 danh sách các con trỏ trỏ đến các hàm, không có tham số hay kiểu dữ liệu trả về
 
     private void Start()
     {
@@ -34,6 +36,6 @@ public class Health : MonoBehaviour
         var explosion = Instantiate(explosionPrefab, transform.position, transform.rotation); // Tạo ra một bản sao của prefab hiệu ứng nổ.
         Destroy(explosion, 1); // Hủy đối tượng hiệu ứng nổ sau 1 giây, để nó có thời gian hiển thị.
         Destroy(gameObject); // Hủy chính đối tượng game object đang gắn script này
-        onDead?.Invoke(); // Thông báo cho các đối tượng khác rằng đối tượng này đã chết.
+        onDead?.Invoke(); // Thông báo cho các đối tượng trong danh sách onDead rằng đối tượng này đã chết.
     }
 }

@@ -8,6 +8,7 @@ public class EnemyHealth : Health
     private void Awake()
     {
         LivingEnemyCount++; // Mỗi enemy mới tạo sẽ tăng
+        Debug.Log("Living enemy count: " + LivingEnemyCount);
     }
 
     protected override void Die()

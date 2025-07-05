@@ -15,6 +15,7 @@ public class BattleFlow : MonoBehaviour
         gameWinUI.SetActive(false);
         gameOverUI.SetActive(false);
         playerHealth.onDead += OnGameOver; // Lắng nghe sự kiện khi người chơi chết.
+                                           // Thêm vào danh sách hàm onDead
     }
     private void Update()
     {
@@ -22,19 +23,23 @@ public class BattleFlow : MonoBehaviour
         {
             OnGameWin();
         }
-        Debug.Log("LivingEnemyCount = " + EnemyHealth.LivingEnemyCount);
     }
     private void OnGameOver()
     {
         gameOverUI.SetActive(true);
         bgMusic.SetActive(false);
+
+        this.enabled = false;
     }
     private void OnGameWin()
     {
-        Debug.Log("YOU WIN!");
         gameWinUI.SetActive(true);
         bgMusic.SetActive(false);
-        playerHealth.gameObject.SetActive(false);
+        if (playerHealth != null)
+        {
+            playerHealth.gameObject.SetActive(false);
+        }
+        this.enabled = false;
     }
     public void ReturnToMainMenu() => SceneManager.LoadScene("MainMenu");
 }
