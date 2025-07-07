@@ -6,14 +6,17 @@ public class Health : MonoBehaviour
 { 
     public GameObject explosionPrefab;
     public int defaultHealthPoint;
-    private int healthPoint;
+    public int healthPoint;
     public System.Action onDead; // Khai báo biến delegate onDead công khai (delegate tương tự như con trỏ trong C/C++)
                                  // onDead là 1 kiểu action, được định nghĩa là delegate: khai báo định dạng hàm sẵn.
                                  // Như 1 danh sách các con trỏ trỏ đến các hàm, không có tham số hay kiểu dữ liệu trả về
+    public System.Action onHealthChanged;
+
 
     private void Start()
     {
         healthPoint = defaultHealthPoint; // Gán giá trị máu hiện tại bằng giá trị máu ban đầu đã thiết lập.
+        onHealthChanged?.Invoke();
     }
 
     public void TakeDamage(int damage)
@@ -23,6 +26,7 @@ public class Health : MonoBehaviour
             return;
         }
         healthPoint -= damage; // Trừ đi lượng máu bằng với sát thương nhận vào.
+        onHealthChanged?.Invoke();
         if (healthPoint <= 0) // Sau khi trừ máu, kiểm tra xem máu có xuống dưới hoặc bằng 0 không
         {
             Die(); // Nếu có, gọi hàm Die() để xử lý cái chết.
